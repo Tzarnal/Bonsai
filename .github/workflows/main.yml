@@ -26,12 +26,12 @@ jobs:
       # Run npm ci
       - name: npm install (ci)
         working-directory: Bonsai
-        run: npm ci
+      - run: npm ci
       
       # Use gulp to run css:prod, purging and minimizing tailwind
       - name: purge and minimize tailwind through gulp 
         working-directory: Bonsai  
-        run: gulp css:prod
+      - run: gulp css:prod
         
       # Publish the site
       - name: Publish
