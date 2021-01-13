@@ -2,10 +2,10 @@
 name: github pages deploy
 
 on:
-  push:    
+  push:
     tags:
-      - '*'                         
-        
+      - "*"
+
 jobs:
   deploy:
     runs-on: ubuntu-18.04
@@ -17,22 +17,21 @@ jobs:
       - name: Setup .NET 5
         uses: actions/setup-dotnet@v1
 
-      # Sets up node
-      - name: setup node
+      # Sets up node      
       - uses: actions/setup-node@v2
         with:
           node-version: 14
-      
+
       # Run npm ci
       - name: npm install (ci)
         working-directory: Bonsai
         run: npm ci
-      
+
       # Use gulp to run css:prod, purging and minimizing tailwind
-      - name: purge and minimize tailwind through gulp 
-        working-directory: Bonsai  
+      - name: purge and minimize tailwind through gulp
+        working-directory: Bonsai
         run: gulp css:prod
-        
+
       # Publish the site
       - name: Publish
         run: dotnet publish Bonsai.sln -c Release -o public -p:GHPages=true
