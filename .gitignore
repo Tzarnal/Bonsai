@@ -23,6 +23,9 @@ obj/
 _ReSharper*/
 App_Data/
 
+#npm ecosystem
+*/node_modules
+
 *.png
 *.kra*
 
