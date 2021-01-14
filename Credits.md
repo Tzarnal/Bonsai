@@ -1,6 +1,6 @@
 # Credits
 
-This project is made possible by the community surrounding it and especially the wonderful people and projects listed in this document.
+This project is written in C#, using Visual Studio Community edition. Its made possible by the amazing Blazor Webassembly Platform and Tailwind css. Further credit for specific things goes to the people and projects called out below.
 
 ## Icon Fonts
 
