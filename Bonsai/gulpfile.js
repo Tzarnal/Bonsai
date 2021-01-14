@@ -20,7 +20,18 @@ gulp.task('css:prod', () => {
             require('tailwindcss'),
             require('autoprefixer')
         ]))
-        .pipe(purgecss({ content: ['**/*.html', '**/*.razor'] }))
+        .pipe(purgecss({
+            content: ['**/*.html', '**/*.razor'],
+            extractors: [
+                {
+                    extractor: (content) => {
+                        // fix for escaped tailwind prefixes (sm:, lg:, etc)
+                        return content.match(/[A-Za-z0-9-_:\/]+/g) || []
+                    },
+                    extensions: ['css', 'html', 'razor'],
+                },
+            ],
+        }))
         .pipe(cleanCSS({ level: 2 }))
         .pipe(gulp.dest('./wwwroot/css/'));
 });
