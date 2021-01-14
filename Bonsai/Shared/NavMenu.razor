@@ -1,22 +1,24 @@
-﻿<div class="">
-    <a class="" href="">Bonsai</a>
-</div>
+﻿<div class="flex flex-row md:flex-col justify-between h-full">
+    <ul class="flex flex-row md:flex-col md-auto list-none ">
+        <li class="m-2 nav-item md:border-b-4 md:pb-2">
+            <span class=""><i class="lni lni-tree text-green-600 pr-1"></i> Bonsai</span>
+        </li>
 
-<div class="">
-    <ul class="">
-        <li class="">
+        <li class="m-2 nav-item">
             <NavLink class="" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
+                <span class="oi oi-chevron-right pr-1 text-gray-800"></span> Home
             </NavLink>
         </li>
-        <li class="">
+        <li class="m-2 nav-item">
             <NavLink class="" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+                <span class="oi oi-chevron-right pr-1 text-gray-800"></span> Counter
             </NavLink>
         </li>
     </ul>
+    <div class="hidden md:block">
+        <i class="lni lni-github-original pr-1"></i><a href="https://github.com/Tzarnal/Bonsai"> On Github</a>
+    </div>
 </div>
 
 @code {
-
 }

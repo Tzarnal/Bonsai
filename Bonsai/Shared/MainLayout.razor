@@ -1,11 +1,14 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="">
-    <NavMenu />
+<div class="flex md:flex-row flex-col">
+    <div class="bg-gray-300 flex-none h-auto  md:h-screen p-6">
+        <NavMenu />
+    </div>
+
+    <div class="main flex-grow m-4">
+        <div class="">
+            @Body
+        </div>
+    </div>   
 </div>
 
-<div class="main">
-    <div class="">
-        @Body
-    </div>
-</div>

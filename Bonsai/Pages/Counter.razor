@@ -1,10 +1,8 @@
 ﻿@page "/counter"
 
-<h1>Counter</h1>
-
 <p>Current count: @currentCount</p>
 
-<button class="" @onclick="IncrementCount">Click me</button>
+<button class="flex bg-blue-400 rounded-lg font-bold text-white text-center m-2 px-2 py-1 transition duration-300 ease-in-out hover:bg-blue-600 mr-6" @onclick="IncrementCount">Click me</button>
 
 @code {
     private int currentCount = 0;
