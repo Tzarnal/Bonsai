@@ -1,14 +1,151 @@
 ﻿@page "/counter"
 
-<p>Current count: @currentCount</p>
+<div class="w-96 grid grid-cols-2 gap-1">
+    <div class="">
+        <p class="mt-4 font-bold">Score:</p>
+    </div>
+    <div class="">
+        <button class="flex @numberColour font-bold text-white text-center m-2 px-2 py-1 transition duration-300  mr-6">@($"{currentCount:N0}")</button>
+    </div>
 
-<button class="flex bg-blue-400 rounded-lg font-bold text-white text-center m-2 px-2 py-1 transition duration-300 ease-in-out hover:bg-blue-600 mr-6" @onclick="IncrementCount">Click me</button>
+    <div class="">
+        <p class="mt-4 font-bold">Make Score Go Up:</p>
+    </div>
+    <div class="">
+        <button class="flex bg-blue-400 rounded-lg font-bold text-white text-center m-2 px-2 py-1 transition duration-300 ease-in-out hover:bg-blue-600 mr-6" @onclick="IncrementCount">@($"{increment:N0}")</button>
+    </div>
+
+    <div hidden="@showUpgrade" class="">
+        <p class="mt-4 font-bold">Upgrade: </p>
+    </div>
+    <div hidden="@showUpgrade" class="">
+        <button class="@upgradeStyles flex  rounded-lg font-bold text-white text-center m-2 px-2 py-1 transition duration-300 ease-in-out mr-6" @onclick="IncrementIncrement">@($"{upgradeCost:N0}")</button>
+    </div>
+
+    <div hidden="@showHalf" class="">
+        <p class="mt-4 font-bold">50%: </p>
+    </div>
+    <div hidden="@showHalf" class="">
+        <button class="@halfStyles flex rounded-lg font-bold text-white text-center m-2 px-2 py-1 transition duration-300 ease-in-out mr-6" @onclick="HalfIt">Go For It</button>
+    </div>
+
+    <div hidden="@showLoop" class="">
+        <p class="mt-4 font-bold">Loooop: </p>
+    </div>
+    <div hidden="@showLoop" class="">
+        <button class="flex bg-blue-400 rounded-lg font-bold text-white text-center m-2 px-2 py-1 transition duration-300 ease-in-out hover:bg-blue-600 mr-6" @onclick="Loop">Start Over</button>
+    </div>
+</div>
 
 @code {
-    private int currentCount = 0;
+    private BigInteger currentCount = 0;
+    private BigInteger increment = 1;
+    private BigInteger totalScore = 0;
+
+    private BigInteger upgradeCost = 9;
+    private int baseIncrementIncrease = 0;
+    private int prestige = 0;
+
+    private bool showUpgrade = true;
+    private bool showHalf = true;
+    private bool showLoop = true;
+
+    private static List<string> numberColours = new List<string> {
+        "bg-green-400", "bg-green-500", "bg-green-600", "bg-green-700", "bg-green-800",
+        "bg-indigo-400", "bg-indigo-500", "bg-indigo-600", "bg-indigo-700", "bg-indigo-800",
+        "bg-pink-400", "bg-pink-500", "bg-pink-600", "bg-pink-700", "bg-pink-800",
+        "bg-blue-400", "bg-blue-500", "bg-blue-600", "bg-blue-700", "bg-blue-800",
+        "bg-yellow-400", "bg-yellow-500", "bg-yellow-600", "bg-yellow-700", "bg-yellow-800",};
+
+    private string numberColour = numberColours[4];
+    private string upgradeStyles = "hover:bg-blue-600 bg-blue-400";
+    private string halfStyles = "hover:bg-blue-600 bg-blue-400";
 
     private void IncrementCount()
     {
-        currentCount++;
+        currentCount += increment;
+        totalScore += increment;
+
+        UpdateVisible();
+    }
+
+    private void IncrementIncrement()
+    {
+        if (currentCount >= upgradeCost)
+        {
+            increment += RoughSqrt(upgradeCost) + baseIncrementIncrease;
+            currentCount -= upgradeCost;
+            upgradeCost = ((upgradeCost) * (upgradeCost / 2));
+        }
+
+        UpdateVisible();
+    }
+
+    private void HalfIt()
+    {
+        if (currentCount > 9999)
+        {
+            currentCount = 1 + currentCount / 2;
+            upgradeCost = 1 + upgradeCost / 2;
+
+            UpdateVisible();
+        }
+    }
+
+    private void Loop()
+    {
+        prestige++;
+
+        currentCount = 0 + prestige;
+        increment = 1 + (prestige * 9);
+        baseIncrementIncrease = 1 + (prestige * 9);
+
+        totalScore = 0;
+        showLoop = false;
+
+        var random = new Random();
+        numberColour = numberColours[random.Next(numberColours.Count)];
+
+    }
+
+    private void UpdateVisible()
+    {
+        if (totalScore > 9)
+        {
+            showUpgrade = false;
+
+        }
+
+        if (totalScore >= 9999 && currentCount >= 9999)
+        {
+            showHalf = false;
+
+        }
+
+        if (totalScore > 314159)
+        {
+            showLoop = false;
+        }
+
+        upgradeStyles = (currentCount > upgradeCost) ? "hover:bg-blue-600 bg-blue-400" : "bg-gray-600";
+        halfStyles = (currentCount > 9999) ? "hover:bg-blue-600 bg-blue-400" : "bg-gray-600";
+    }
+
+    //https://stackoverflow.com/questions/20977218/fast-approximation-of-a-square-root
+    BigInteger RoughSqrt(BigInteger x)
+    {
+        var bytes = x.ToByteArray();    // get binary representation
+        var bits = (bytes.Length - 1) * 8;  // get # bits in all but msb
+                                            // add # bits in msb
+        for (var msb = bytes[bytes.Length - 1]; msb != 0; msb >>= 1)
+            bits++;
+        var sqrtBits = bits / 2;    // # bits in the sqrt
+        var sqrtBytes = sqrtBits / 8 + 1;   // # bytes in the sqrt
+                                            // avoid making a negative number by adding an extra 0-byte if the high bit is set
+        var sqrtArray = new byte[sqrtBytes + (sqrtBits % 8 == 7 ? 1 : 0)];
+        // set the msb
+        sqrtArray[sqrtBytes - 1] = (byte)(1 << (sqrtBits % 8));
+        // make new BigInteger from array of bytes
+        return new System.Numerics.BigInteger(sqrtArray);
     }
 }
