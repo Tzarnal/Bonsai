@@ -8,7 +8,7 @@ namespace BonsaiGenerators
 {
     public class BonsaiString : RandomGenerator
     {
-        private static string _content;
+        private readonly string _content;
 
         public BonsaiString(string content)
         {
