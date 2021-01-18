@@ -1,5 +1,7 @@
 ﻿@page "/counter"
 
+@using Components
+
 <div class="w-96 grid grid-cols-2 gap-1">
     <div class="">
         <p class="mt-4 font-bold">Score:</p>
@@ -12,28 +14,28 @@
         <p class="mt-4 font-bold">Make Score Go Up:</p>
     </div>
     <div class="">
-        <button class="flex bg-blue-400 rounded-lg font-bold text-white text-center m-2 px-2 py-1 transition duration-300 ease-in-out hover:bg-blue-600 mr-6" @onclick="IncrementCount">@($"{increment:N0}")</button>
+        <BonsaiButton ClickHandler="IncrementCount">@($"{increment:N0}")</BonsaiButton>
     </div>
 
     <div hidden="@showUpgrade" class="">
         <p class="mt-4 font-bold">Upgrade: </p>
     </div>
     <div hidden="@showUpgrade" class="">
-        <button class="@upgradeStyles flex  rounded-lg font-bold text-white text-center m-2 px-2 py-1 transition duration-300 ease-in-out mr-6" @onclick="IncrementIncrement">@($"{upgradeCost:N0}")</button>
+        <BonsaiButton ClickHandler="IncrementIncrement" Disabled="upgradeDisabled">@($"{upgradeCost:N0}")</BonsaiButton>
     </div>
 
     <div hidden="@showHalf" class="">
         <p class="mt-4 font-bold">50%: </p>
     </div>
     <div hidden="@showHalf" class="">
-        <button class="@halfStyles flex rounded-lg font-bold text-white text-center m-2 px-2 py-1 transition duration-300 ease-in-out mr-6" @onclick="HalfIt">Go For It</button>
+        <BonsaiButton ClickHandler="HalfIt" Disabled="halfDisabled">Go For It</BonsaiButton>
     </div>
 
     <div hidden="@showLoop" class="">
         <p class="mt-4 font-bold">Loooop: </p>
     </div>
     <div hidden="@showLoop" class="">
-        <button class="flex bg-blue-400 rounded-lg font-bold text-white text-center m-2 px-2 py-1 transition duration-300 ease-in-out hover:bg-blue-600 mr-6" @onclick="Loop">Start Over</button>
+        <BonsaiButton ClickHandler="Loop" Disabled="halfDisabled">Start Over</BonsaiButton>        
     </div>
 </div>
 
@@ -49,6 +51,9 @@
     private bool showUpgrade = true;
     private bool showHalf = true;
     private bool showLoop = true;
+
+    private bool upgradeDisabled = false;
+    private bool halfDisabled = false;
 
     private static List<string> numberColours = new List<string> {
         "bg-green-400", "bg-green-500", "bg-green-600", "bg-green-700", "bg-green-800",
@@ -116,7 +121,7 @@
 
         }
 
-        if (totalScore >= 9999 && currentCount >= 9999)
+        if (totalScore >= 5000 && currentCount >= 5000)
         {
             showHalf = false;
 
@@ -127,8 +132,8 @@
             showLoop = false;
         }
 
-        upgradeStyles = (currentCount > upgradeCost) ? "hover:bg-blue-600 bg-blue-400" : "bg-gray-600";
-        halfStyles = (currentCount > 9999) ? "hover:bg-blue-600 bg-blue-400" : "bg-gray-600";
+        upgradeDisabled = currentCount < upgradeCost;
+        halfDisabled = currentCount < 5000;
     }
 
     //https://stackoverflow.com/questions/20977218/fast-approximation-of-a-square-root
