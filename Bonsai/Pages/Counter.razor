@@ -1,7 +1,5 @@
 ﻿@page "/counter"
 
-@using Components
-
 <div class="w-96 grid grid-cols-2 gap-1">
     <div class="">
         <p class="mt-4 font-bold">Score:</p>
@@ -35,7 +33,7 @@
         <p class="mt-4 font-bold">Loooop: </p>
     </div>
     <div hidden="@showLoop" class="">
-        <BonsaiButton ClickHandler="Loop" Disabled="halfDisabled">Start Over</BonsaiButton>        
+        <BonsaiButton ClickHandler="Loop" Disabled="halfDisabled">Start Over</BonsaiButton>
     </div>
 </div>
 
@@ -63,8 +61,6 @@
         "bg-yellow-400", "bg-yellow-500", "bg-yellow-600", "bg-yellow-700", "bg-yellow-800",};
 
     private string numberColour = numberColours[4];
-    private string upgradeStyles = "hover:bg-blue-600 bg-blue-400";
-    private string halfStyles = "hover:bg-blue-600 bg-blue-400";
 
     private void IncrementCount()
     {
