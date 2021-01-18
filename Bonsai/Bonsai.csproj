@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BonsaiGenerators\BonsaiGenerators.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="wwwroot\favicon.ico">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
