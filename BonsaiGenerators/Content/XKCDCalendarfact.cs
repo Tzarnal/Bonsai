@@ -38,8 +38,9 @@
             "might happen twice this year"
         };
 
-        private static readonly RandomTable reason = new RandomTable
+        private static readonly RandomTableMixedWeighted reasons = new RandomTableMixedWeighted
         {
+            {  new XKCDCalendarfactSub(), 5 },
             "time zone legislation in Indiana",
             "time zone legislation in Arizona",
             "time zone legislation in Russia",
@@ -47,7 +48,7 @@
             "magnetic field reversal",
             "an arbitrary decision by Benjamin Franklin",
             "an arbitrary decision by Isaac Newton",
-            "an arbitrary decision by FDR"
+            "an arbitrary decision by FDR",
         };
 
         private static readonly RandomTable factiod = new RandomTable
@@ -69,16 +70,47 @@
         private static readonly RandomTableWeighted consequence = new RandomTableWeighted
         {
             {"", 5 },
-            {"While it may seem like trivia it causes huge headaches for software developers.", 1 },
-            {"While it may seem like trivia it is taken advantage of by high-speed traders.", 1 },
-            {"While it may seem like trivia it triggered the 2003 Northeast Blackout.", 1 },
-            {"While it may seem like trivia it has to be corrected for by GPS satellites.", 1 },
-            {"While it may seem like trivia it is now recognized as a major cause of World War I.", 1 }
+            "While it may seem like trivia it causes huge headaches for software developers.",
+            "While it may seem like trivia it is taken advantage of by high-speed traders.",
+            "While it may seem like trivia it triggered the 2003 Northeast Blackout.",
+            "While it may seem like trivia it has to be corrected for by GPS satellites.",
+            "While it may seem like trivia it is now recognized as a major cause of World War I."
         };
 
         public override string ToString()
         {
-            return $"Did you know that {moment} {error} because of {reason}? Apparantly {factiod}. {consequence}";
+            return $"Did you know that {moment} {error} because of {reasons}? Apparantly {factiod}. {consequence}";
+        }
+    }
+
+    public class XKCDCalendarfactSub : RandomGenerator
+    {
+        private static readonly RandomTable movement = new RandomTable
+        {
+            "precession",
+            "libration",
+            "nutation",
+            "libation",
+            "eccentricity",
+            "obliquity"
+        };
+
+        private static readonly RandomTable body = new RandomTable
+        {
+            "moon",
+            "sun",
+            "stars",
+            "planets",
+            "earth's axis",
+            "equator",
+            "prime meridian",
+            "international date line",
+            "mason dixon line"
+        };
+
+        public override string ToString()
+        {
+            return $"{movement} of the {body}";
         }
     }
 }
