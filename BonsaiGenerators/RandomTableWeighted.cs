@@ -7,7 +7,7 @@ namespace BonsaiGenerators
     {
         private readonly Dictionary<string, int> _entries = new();
 
-        public void Add(string key, int value)
+        public void Add(string key, int value = 1)
         {
             _entries.Add(key, value);
         }
