@@ -1,0 +1,20 @@
+﻿@page "/XKCDCalendarFact"
+
+@using BonsaiGenerators.Content;
+
+<h3 class="p-2 text-3xl">XKCD Calender Fact</h3>
+
+<BonsaiButton ClickHandler="GenerateContent">Generate</BonsaiButton>
+
+<p class="p2">@Content</p>
+
+@code {
+    private XKCDCalendarfact generator = new XKCDCalendarfact();
+
+    string Content;
+
+    private void GenerateContent()
+    {
+        Content = generator.Next();
+    }
+}
