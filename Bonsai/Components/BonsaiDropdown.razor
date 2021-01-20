@@ -1,0 +1,26 @@
+﻿<div class="inline-block  align-top  m-2">
+    <select class="form-select bg-@ColourStyle-400 hover:bg-@ColourStyle-600 rounded-lg font-bold h-10 text-@TextColourStyle" @onchange="OnChangeEvent">
+        @foreach (var option in Options)
+        {
+            <option value="@option">@option</option>
+
+        }
+    </select>
+</div>
+
+@code {
+    [Parameter]
+    public string SelectedValue { get; set; }
+
+    [Parameter]
+    public EventCallback<ChangeEventArgs> OnChangeEvent { get; set; }
+
+    [Parameter]
+    public IEnumerable<string> Options { get; set; } = new List<string> { "One", "Two", "Three" };
+
+    [Parameter]
+    public string ColourStyle { get; set; } = "blue";
+
+    [Parameter]
+    public string TextColourStyle { get; set; } = "white";
+}
