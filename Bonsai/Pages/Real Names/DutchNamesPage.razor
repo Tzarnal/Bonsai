@@ -1,0 +1,40 @@
+﻿@using BonsaiGenerators;
+@using BonsaiGenerators.Content;
+
+@page "/RealNames/Dutch"
+
+<h3 class="p-2 text-3xl">Dutch Names</h3>
+
+<hr class="px-8" />
+
+<div class="space-x-2">
+    <BonsaiDropdown OnChangeEvent="CountDropdownChanged" Options="dropDownValues" />
+    <BonsaiButton ClickHandler="Generate">More</BonsaiButton>
+</div>
+
+<ul class="list-disc list-inside p-4 size grid grid-cols-2 w-max">
+    @for (int i = 0; i < nameCount; i++)
+    {
+        <li class="pr-4">
+            @generator.ToString()
+        </li>
+    }
+</ul>
+
+@code {
+    private DutchNames generator = new();
+
+    private int nameCount = 10;
+    private List<string> dropDownValues = new() { "10", "20", "50" };
+
+    private void Generate()
+    {
+        StateHasChanged();
+    }
+
+    private void CountDropdownChanged(ChangeEventArgs e)
+    {
+        nameCount = int.Parse((string)e.Value);
+        StateHasChanged();
+    }
+}
