@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    .bonsai-form {
+        border-width: 1px !important;
+        border-color: #6b7280 !important;
+    }
+}
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;

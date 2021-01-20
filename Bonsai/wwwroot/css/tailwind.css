@@ -31440,6 +31440,11 @@ select {
           animation: bounce 1s infinite;
 }
 
+.bonsai-form {
+  border-width: 1px !important;
+  border-color: #6b7280 !important;
+}
+
 #blazor-error-ui {
   background: lightyellow;
   bottom: 0;
