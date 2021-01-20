@@ -1,19 +1,21 @@
 ﻿<div class="inline-block  align-top  m-2">
-    <select class="form-select bg-@ColourStyle-400 hover:bg-@ColourStyle-600 rounded-lg font-bold h-10 text-@TextColourStyle" @onchange="OnChangeEvent">
+    <select @bind="InternalValue" class="form-select bg-@ColourStyle-400 hover:bg-@ColourStyle-600 rounded-lg font-bold h-10 text-@TextColourStyle">
         @foreach (var option in Options)
         {
             <option value="@option">@option</option>
-
         }
     </select>
 </div>
 
 @code {
     [Parameter]
-    public string SelectedValue { get; set; }
+    public string Value { get; set; }
 
     [Parameter]
-    public EventCallback<ChangeEventArgs> OnChangeEvent { get; set; }
+    public EventCallback<string> ValueChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnUpdate { get; set; }
 
     [Parameter]
     public IEnumerable<string> Options { get; set; } = new List<string> { "One", "Two", "Three" };
@@ -23,4 +25,26 @@
 
     [Parameter]
     public string TextColourStyle { get; set; } = "white";
+
+    private string InternalValue
+    {
+        get => Value;
+        set
+        {
+            Value = value;
+            OnOptionSelect();
+        }
+    }
+
+    private async Task OnOptionSelect()
+    {
+        await OnUpdate.InvokeAsync(InternalValue);
+        await ValueChanged.InvokeAsync(InternalValue);
+    }
+
+    protected override void OnInitialized()
+    {
+        InternalValue = Value;
+        Console.WriteLine($"Initialized: Dropdown set to {Value}");
+    }
 }
