@@ -1,11 +1,13 @@
-﻿@if (!Disabled)
-{
-    <button @onclick="ClickHandler" class="flex bg-@ColourStyle-400 hover:bg-@ColourStyle-600 rounded-lg font-bold text-@TextColourStyle text-center mr-6 m-2 px-2 py-1 ease-in-out transition duration-300">@ChildContent</button>
-}
-else
-{
-    <button class="flex bg-gray-600 rounded-lg font-bold text-white text-center m-2 px-2 py-1 mr-6">@ChildContent</button>
-}
+﻿<div class="inline-block align-top m-2">
+    @if (!Disabled)
+    {
+        <button @onclick="ClickHandler" class="bonsai-button flex bg-@ColourStyle-400 hover:bg-@ColourStyle-600 rounded-lg font-bold text-@TextColourStyle text-center align-top mt-0 mr-6 px-2 pt-1 h-10 ease-in-out transition duration-300">@ChildContent</button>
+    }
+    else
+    {
+        <button class="bonsai-button flex bg-gray-600 rounded-lg font-bold text-white text-center text-center align-top mt-0 mr-6 px-2 pt-1 h-10">@ChildContent</button>
+    }
+</div>
 
 @code {
     [Parameter]
