@@ -1,0 +1,44 @@
+﻿<div class="inline-block align-top  m-2 h-10">
+    <label class="inline-flex items-center">
+        <input @bind="InternalValue" type="checkbox" class="bonsai-form form-checkbox h-10 w-10 rounded-lg text-@ColourStyle-400">
+        <span class="ml-2">@ChildContent</span>
+    </label>
+</div>
+
+@code {
+    [Parameter]
+    public bool Value { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> ValueChanged { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnUpdate { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string ColourStyle { get; set; } = "blue";
+
+    private bool InternalValue
+    {
+        get => Value;
+        set
+        {
+            Value = value;
+            OnToggle();
+        }
+    }
+
+    private async Task OnToggle()
+    {
+        await OnUpdate.InvokeAsync(InternalValue);
+        await ValueChanged.InvokeAsync(InternalValue);
+    }
+
+    protected override void OnInitialized()
+    {
+        InternalValue = Value;
+    }
+}
