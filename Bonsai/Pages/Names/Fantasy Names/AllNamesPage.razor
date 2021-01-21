@@ -1,0 +1,14 @@
+﻿@using BonsaiGenerators;
+@using BonsaiGenerators.Content;
+
+@page "/FantasyNames/All"
+
+<h3 class="p-2 text-3xl">All Races and Cultures</h3>
+
+<hr class="px-8" />
+
+<NameGeneratorDisplay generator="@generator" />
+
+@code {
+    private RandomNameGenerator generator = new AllFantasyNames();
+}

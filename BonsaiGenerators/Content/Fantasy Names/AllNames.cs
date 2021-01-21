@@ -2,15 +2,12 @@
 
 namespace BonsaiGenerators.Content
 {
-    public class AllRealNames : RandomNameGenerator
+    public class AllFantasyNames : RandomNameGenerator
     {
         private static readonly List<RandomNameGenerator> NameGenerators = new List<RandomNameGenerator>()
         {
-            new AmericanNames(),
-            new ChineseNames(),
-            new DutchNames(),
-            new FrenchNames(),
-            new GreekNames(),
+            new DragonbornNames(),
+            new HumanNames(),
         };
 
         public override string FemaleFullName()
