@@ -1,0 +1,72 @@
+﻿@using BonsaiGenerators;
+
+<div class="space-x-3">
+    <BonsaiButton ClickHandler="Generate">More</BonsaiButton>
+    <BonsaiDropdown @bind-Value="nameCountString" OnUpdate="@CountDropdownChanged" Options="dropDownValues" />
+    <BonsaiCheckbox @bind-Value="MixGenders">Mixed Genders</BonsaiCheckbox>
+</div>
+
+<hr class="px-8" />
+
+@if (MixGenders)
+{
+    <ul class="list-disc list-inside p-4 size grid grid-cols-2 w-max">
+        @for (int i = 0; i < nameCount; i++)
+        {
+            <li class="pr-4">
+                @Generator.ToString()
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <div class="grid grid-cols-2 w-max mt-4">
+        <div>
+            <h3 class="text-2xl font-bold">Male</h3>
+            <hr class="m-2" />
+            <ul class="list-disc list-inside size w-max mr-4">
+                @for (int i = 0; i < nameCount / 2; i++)
+                {
+                    <li class="pr-4">
+                        @Generator.MaleFullName()
+                    </li>
+                }
+            </ul>
+        </div>
+        <div>
+            <h3 class="text-2xl font-bold">Female</h3>
+            <hr class="m-2" />
+            <ul class="list-disc list-inside size w-max">
+                @for (int i = 0; i < nameCount / 2; i++)
+                {
+                    <li class="pr-4">
+                        @Generator.FemaleFullName()
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public RandomNameGenerator Generator { get; set; }
+
+    private int nameCount = 10;
+    private string nameCountString = "10";
+    private List<string> dropDownValues = new() { "10", "20", "50" };
+
+    private bool MixGenders { get; set; } = true;
+
+    private void Generate()
+    {
+        StateHasChanged();
+    }
+
+    private void CountDropdownChanged(string Value)
+    {
+        nameCount = int.Parse(Value);
+        StateHasChanged();
+    }
+}
