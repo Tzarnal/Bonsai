@@ -1,9 +1,8 @@
-﻿using BonsaiGenerators;
-using BonsaiGenerators.Tables.Names.Real.Dutch;
+﻿using BonsaiGenerators.Tables.Names.Real.Dutch;
 
 namespace BonsaiGenerators.Content
 {
-    public class DutchNames : RandomGenerator
+    public class DutchNames : RandomNameGenerator
     {
         private static readonly RandomGenerator FamilyName = new DutchFamilyNames();
         private static readonly RandomGenerator MaleGivenName = new DutchMaleGiven();
@@ -15,29 +14,24 @@ namespace BonsaiGenerators.Content
             FemaleGivenName
         };
 
+        public override string FullName()
+        {
+            return ToString();
+        }
+
+        public override string FemaleFullName()
+        {
+            return $"{FemaleGivenName} {FamilyName}";
+        }
+
+        public override string MaleFullName()
+        {
+            return $"{MaleGivenName} {FamilyName}";
+        }
+
         public override string ToString()
         {
             return $"{GivenName} {FamilyName}";
-        }
-
-        public static string FirstNameFemale()
-        {
-            return FemaleGivenName.Next();
-        }
-
-        public static string FirstNameMale()
-        {
-            return MaleGivenName.Next();
-        }
-
-        public static string FirstName()
-        {
-            return GivenName.Next();
-        }
-
-        public static string LastName()
-        {
-            return FamilyName.Next();
         }
     }
 }
