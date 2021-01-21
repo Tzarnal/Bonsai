@@ -4,9 +4,9 @@ namespace BonsaiGenerators.Content
 {
     public class AmericanNames : RandomNameGenerator
     {
-        private static readonly RandomGenerator FamilyName = new AmericanFamily();
-        private static readonly RandomGenerator MaleGivenName = new AmericanMaleGiven();
-        private static readonly RandomGenerator FemaleGivenName = new AmericanFemaleGiven();
+        private static readonly AmericanFamily FamilyName = new();
+        private static readonly AmericanMaleGiven MaleGivenName = new();
+        private static readonly AmericanFemaleGiven FemaleGivenName = new();
 
         private static readonly RandomGenerator GivenName = new RandomTableMixed
         {
