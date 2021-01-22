@@ -6,11 +6,7 @@
     .bonsai-form {
         border-width: 1px !important;
         border-color: #6b7280 !important;
-    }
-
-    .pt-button {
-        padding-top: 0.375rem;
-    }
+    }    
 }
 
 #blazor-error-ui {

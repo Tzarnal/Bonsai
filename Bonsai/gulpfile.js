@@ -25,8 +25,8 @@ gulp.task('css:prod', () => {
             extractors: [
                 {
                     extractor: (content) => {
-                        // fix for escaped tailwind prefixes (sm:, lg:, etc)
-                        return content.match(/[A-Za-z0-9-_:\/]+/g) || []
+                        // fix for escaped tailwind prefixes (sm:, lg:, etc) and .5's
+                        return content.match(/[A-Za-z0-9-_:\.\/]+/g) || []
                     },
                     extensions: ['css', 'html', 'razor'],
                 },
