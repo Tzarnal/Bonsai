@@ -1,6 +1,6 @@
 ﻿<div class="inline-block align-top  m-2 h-10">
     <label class="inline-flex items-center">
-        <input @bind="InternalValue" type="checkbox" class="bonsai-form form-checkbox h-10 w-10 rounded-lg text-@ColourStyle-400">
+        <input @bind="InternalValue" type="checkbox" class="bonsai-form form-checkbox h-10 w-10 rounded-lg text-blue-400">
         <span class="ml-2">@ChildContent</span>
     </label>
 </div>
@@ -17,9 +17,6 @@
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-
-    [Parameter]
-    public string ColourStyle { get; set; } = "blue";
 
     private bool InternalValue
     {

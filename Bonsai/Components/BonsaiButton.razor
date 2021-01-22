@@ -1,7 +1,7 @@
 ﻿<div class="inline-block align-top m-2 mr-0">
     @if (!Disabled)
     {
-        <button @onclick="ClickHandler" class="bonsai-form flex bg-@ColourStyle-400 hover:bg-@ColourStyle-600 rounded-lg font-bold text-@TextColourStyle text-center align-top mt-0 px-2 pt-button h-10 ease-in-out transition duration-300">@ChildContent</button>
+        <button @onclick="ClickHandler" class="bonsai-form flex bg-blue-400 hover:bg-blue-600 rounded-lg font-bold text-white text-center align-top mt-0 px-2 pt-1.5 h-10 ease-in-out transition duration-300">@ChildContent</button>
     }
     else
     {
@@ -15,12 +15,6 @@
 
     [Parameter]
     public bool Disabled { get; set; } = false;
-
-    [Parameter]
-    public string ColourStyle { get; set; } = "blue";
-
-    [Parameter]
-    public string TextColourStyle { get; set; } = "white";
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
