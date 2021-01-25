@@ -5,7 +5,7 @@ namespace BonsaiGenerators
     public sealed class Genie
     {
         private static readonly Genie instance = new Genie();
-        private readonly Random _random;
+        private Random _random;
 
         static Genie()
         {
@@ -24,6 +24,12 @@ namespace BonsaiGenerators
         public int Next(int minValue, int maxValue)
         {
             return _random.Next(minValue, maxValue);
+        }
+
+        public void SetSeed(string seed)
+        {
+            var seedInt = seed.GetHashCode();
+            _random = new Random(seedInt);
         }
 
         public static Genie Instance => instance;

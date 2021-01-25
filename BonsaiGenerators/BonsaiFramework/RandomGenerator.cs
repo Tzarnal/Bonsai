@@ -6,8 +6,13 @@ namespace BonsaiGenerators
     {
         public override abstract string ToString();
 
-        public string Next()
+        public string Next(string seed = "")
         {
+            if (seed != "")
+            {
+                Genie.Instance.SetSeed(seed);
+            }
+
             return ToString();
         }
     }
