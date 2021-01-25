@@ -304,9 +304,18 @@ namespace BonsaiGenerators.Content
                 .DynamicInterpolation(_replacements)
                 .BulkReplace(new List<(string, string)> {
                     ("{location}", location)
-                });
+                }).CapitalizeFirstChar();
 
-            return name.CapitalizeFirstChar();
+            var genie = Genie.Instance;
+
+            int number = genie.Next(3, 99);
+
+            if (genie.Next(2) == 1)
+            {
+                number = genie.Next(5, 20);
+            }
+
+            return $" {number} {name}";
         }
 
         public string Hail()
