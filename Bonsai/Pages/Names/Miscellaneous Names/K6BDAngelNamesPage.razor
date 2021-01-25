@@ -1,0 +1,29 @@
+﻿@using BonsaiGenerators;
+@using BonsaiGenerators.Content;
+
+@page "/MiscellaneousNames/K6BDAngel"
+
+<h3 class="p-2 text-3xl">Kill Six Billion Demons: Angel Names</h3>
+
+<hr class="px-8" />
+
+<div class="space-x-3">
+    <BonsaiButton ClickHandler="Generate">Consult the Concordance</BonsaiButton>
+</div>
+
+<hr class="px-8" />
+
+<p>
+    <span class="font-bold">@_generator.Hail()</span> @_generator.Next()
+</p>
+
+@code {
+    private K6BDAngelNames _generator = new();
+
+    private bool MixGenders { get; set; } = true;
+
+    private void Generate()
+    {
+        StateHasChanged();
+    }
+}
