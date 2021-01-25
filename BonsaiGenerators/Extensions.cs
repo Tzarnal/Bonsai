@@ -36,5 +36,32 @@ namespace BonsaiGenerators
 
             return element;
         }
+
+        public static string ReplaceFirst(this string text, string search, string replace)
+        {
+            int position = text.IndexOf(search);
+
+            if (position < 0)
+            {
+                return text;
+            }
+
+            return $"{text.Substring(0, position)}{replace}{text[(position + search.Length)..]}";
+        }
+
+        public static string BulkReplace(this string text, List<(string search, string replace)> replacements)
+        {
+            foreach (var (search, replace) in replacements)
+            {
+                text = text.Replace(search, replace);
+            }
+
+            return text;
+        }
+
+        public static string CapitalizeFirstChar(this string text)
+        {
+            return $"{text[0].ToString().ToUpper()}{text[1..]}";
+        }
     }
 }
