@@ -1,0 +1,46 @@
+﻿@using BonsaiGenerators;
+@using BonsaiGenerators.Content;
+
+@page "/MiscellaneousNames/MetalGear"
+@page "/MiscellaneousNames/Foxhoud"
+
+<h3 class="p-2 text-3xl">FOXHOUND Unit Names</h3>
+
+<hr class="px-8" />
+
+<div class="space-x-3">
+    <BonsaiButton ClickHandler="Generate">More</BonsaiButton>
+    <BonsaiDropdown @bind-Value="nameCountString" OnUpdate="@CountDropdownChanged" Options="dropDownValues" />
+</div>
+
+<hr class="px-8" />
+
+<ul class="list-disc list-inside p-4 size grid grid-cols-2 w-max">
+    @for (int i = 0; i < nameCount; i++)
+    {
+        <li class="pr-4">
+            @_generator.Next()
+        </li>
+    }
+</ul>
+
+@code {
+    private RandomGenerator _generator = new MetalGearNames();
+
+    private int nameCount = 10;
+    private string nameCountString = "10";
+    private List<string> dropDownValues = new() { "10", "20", "50" };
+
+    private bool MixGenders { get; set; } = true;
+
+    private void Generate()
+    {
+        StateHasChanged();
+    }
+
+    private void CountDropdownChanged(string Value)
+    {
+        nameCount = int.Parse(Value);
+        StateHasChanged();
+    }
+}
