@@ -1,0 +1,63 @@
+﻿@page "/GachaCharacter"
+
+@using BonsaiGenerators.Content;
+@using BonsaiGenerators;
+
+<h3 class="p-2 text-3xl">Gacha Character Generator</h3>
+
+<hr class="px-8" />
+
+<div class="">
+    <BonsaiButton ClickHandler="GenerateContent">Pull</BonsaiButton>
+    <input @bind="Name" class="inline-block align-top  m-2 h-10 bonsai-form  h-10 w-40 rounded-lg font-bold text-sm">
+</div>
+
+<hr class="px-8" />
+
+@if (Render)
+{
+    <h2 class="p-2 text-3xl">@Name</h2>
+
+    <p>
+        <span class="font-bold">Rarity:</span> @Generator.Rarity.Next()
+    </p>
+
+    <p>
+        <span class="font-bold">Variants:</span>
+        @Generator.Variants(Genie.Next(1, 4) + Genie.Next(1, 3))
+    </p>
+
+    <h3 class="p-2 text-2xl">Description</h3>
+
+    <p>
+        @Generator.ArtDescription
+    </p>
+    <p>
+        @Generator.Popularity.Next()
+    </p>
+    <p>
+        @Generator.OptionalPopularity.Next()
+    </p>
+    <p>
+        @Generator.FanArt
+    </p>
+}
+
+@code {
+    private string Name { get; set; } = "SSR Cute Waifu!";
+    private bool Render = false;
+
+    private GachaCharacterGenerator Generator;
+
+    private void GenerateContent()
+    {
+        Generator = new(Name);
+        Render = true;
+    }
+
+    protected override void OnInitialized()
+    {
+
+    }
+
+}
