@@ -8,16 +8,26 @@ namespace BonsaiGenerators
 {
     public class BonsaiString : RandomGenerator
     {
-        private readonly string _content;
+        public string Content;
 
         public BonsaiString(string content)
         {
-            _content = content;
+            Content = content;
+        }
+
+        public override string Next(string Seed = "")
+        {
+            if (Seed != "")
+            {
+                Genie.SetSeed(Seed);
+            }
+
+            return $"{Prefix}{Content}{Suffix}";
         }
 
         public override string ToString()
         {
-            return _content;
+            return Next();
         }
     }
 }

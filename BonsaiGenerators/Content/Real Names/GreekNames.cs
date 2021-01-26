@@ -26,7 +26,7 @@ namespace BonsaiGenerators.Content
 
         public override string ToString()
         {
-            var coin = Genie.Instance.Next(0, 2);
+            var coin = Genie.Next(0, 2);
             if (coin == 1)
             {
                 return MaleFullName();

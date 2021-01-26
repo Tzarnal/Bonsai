@@ -273,9 +273,21 @@ namespace BonsaiGenerators.Content
             "Zero",
         };
 
+        public override string Next(string Seed = "")
+        {
+            if (Seed != "")
+            {
+                Genie.SetSeed(Seed);
+            }
+
+            var randomElement = $"{foxhoundajective} {animal}";
+
+            return $"{Prefix}{randomElement}{Suffix}";
+        }
+
         public override string ToString()
         {
-            return $"{foxhoundajective} {animal}";
+            return Next();
         }
     }
 }

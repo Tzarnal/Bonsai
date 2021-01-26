@@ -77,9 +77,21 @@
             "While it may seem like trivia it is now recognized as a major cause of World War I."
         };
 
+        public override string Next(string Seed = "")
+        {
+            if (Seed != "")
+            {
+                Genie.SetSeed(Seed);
+            }
+
+            var content = $"Did you know that {moment} {error} because of {reasons}? Apparantly {factiod}. {consequence}";
+
+            return $"{Prefix}{content}{Suffix}";
+        }
+
         public override string ToString()
         {
-            return $"Did you know that {moment} {error} because of {reasons}? Apparantly {factiod}. {consequence}";
+            return Next();
         }
     }
 
@@ -108,9 +120,21 @@
             "mason dixon line"
         };
 
+        public override string Next(string Seed = "")
+        {
+            if (Seed != "")
+            {
+                Genie.SetSeed(Seed);
+            }
+
+            var content = $"{movement} of the {body}";
+
+            return $"{Prefix}{content}{Suffix}";
+        }
+
         public override string ToString()
         {
-            return $"{movement} of the {body}";
+            return Next();
         }
     }
 }

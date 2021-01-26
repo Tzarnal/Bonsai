@@ -1,8 +1,20 @@
-﻿namespace BonsaiGenerators.Tables.Generic.Creatures
+﻿using System.Collections.Generic;
+
+namespace BonsaiGenerators.Tables.Generic.Creatures
 {
-    public class AnimalsSingleWord : RandomGenerator
+    public class AnimalsSingleWord : RandomTable
     {
-        public static readonly RandomTable AnimalNames = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> AnimalNames = new()
         {
             "Aardvark",
             "Aardwolf",
@@ -352,9 +364,9 @@
             "Zebra",
         };
 
-        public override string ToString()
+        public AnimalsSingleWord()
         {
-            return AnimalNames.Next();
+            Entries = AnimalNames;
         }
     }
 }

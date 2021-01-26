@@ -1,8 +1,20 @@
-﻿namespace BonsaiGenerators.Tables.Generic.Words
+﻿using System.Collections.Generic;
+
+namespace BonsaiGenerators.Tables.Generic.Words
 {
-    internal class SongNouns : RandomGenerator
+    internal class SongNouns : RandomTable
     {
-        public static readonly RandomTable words = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> words = new()
         {
             "Anthem",
             "Aria",
@@ -37,9 +49,9 @@
             "Verse",
         };
 
-        public override string ToString()
+        public SongNouns()
         {
-            return words.ToString();
+            Entries = words;
         }
     }
 }

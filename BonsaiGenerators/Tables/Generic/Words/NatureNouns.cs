@@ -1,8 +1,20 @@
-﻿namespace BonsaiGenerators.Tables.Generic.Words
+﻿using System.Collections.Generic;
+
+namespace BonsaiGenerators.Tables.Generic.Words
 {
-    internal class NatureNouns : RandomGenerator
+    internal class NatureNouns : RandomTable
     {
-        public static readonly RandomTable words = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> words = new()
         {
             "Autumn",
             "Clouds",
@@ -41,9 +53,9 @@
             "Winter",
         };
 
-        public override string ToString()
+        public NatureNouns()
         {
-            return words.ToString();
+            Entries = words;
         }
     }
 }

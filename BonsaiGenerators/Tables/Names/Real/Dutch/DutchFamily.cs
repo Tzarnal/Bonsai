@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace BonsaiGenerators.Tables.Names.Real.Dutch
 {
-    public class DutchFamilyNames : RandomGenerator
+    public class DutchFamilyNames : RandomTable
     {
-        public static readonly RandomTable FamilyNames = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> FamilyNames = new()
         {
             "Aarts",
             "Albers",
@@ -293,9 +303,9 @@ namespace BonsaiGenerators.Tables.Names.Real.Dutch
             "Zijlstra"
         };
 
-        public override string ToString()
+        public DutchFamilyNames()
         {
-            return FamilyNames.Next();
+            Entries = FamilyNames;
         }
     }
 }

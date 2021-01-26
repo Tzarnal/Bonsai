@@ -1,8 +1,20 @@
-﻿namespace BonsaiGenerators.Tables.Names.Real.Greek
+﻿using System.Collections.Generic;
+
+namespace BonsaiGenerators.Tables.Names.Real.Greek
 {
-    internal class GreekFemaleGiven : RandomGenerator
+    internal class GreekFemaleGiven : RandomTable
     {
-        public static readonly RandomTable FemaleGivenNames = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> FemaleGivenNames = new()
         {
             "Adriani",
             "Afroditi",
@@ -218,9 +230,9 @@
             "Zoi",
         };
 
-        public override string ToString()
+        public GreekFemaleGiven()
         {
-            return FemaleGivenNames.Next();
+            Entries = FemaleGivenNames;
         }
     }
 }

@@ -1,8 +1,20 @@
-﻿namespace BonsaiGenerators.Tables.Names.Fantasy.Human
+﻿using System.Collections.Generic;
+
+namespace BonsaiGenerators.Tables.Names.Fantasy.Human
 {
-    internal class HumanFamily : RandomGenerator
+    internal class HumanFamily : RandomTable
     {
-        public static readonly RandomTable FamilyNames = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> FamilyNames = new()
         {
             "Smith",
             "Taylor",
@@ -1191,9 +1203,9 @@
             "Bulter",
         };
 
-        public override string ToString()
+        public HumanFamily()
         {
-            return FamilyNames.Next();
+            Entries = FamilyNames;
         }
     }
 }

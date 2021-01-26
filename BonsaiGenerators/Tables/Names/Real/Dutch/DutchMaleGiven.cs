@@ -1,14 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BonsaiGenerators.Tables.Names.Real.Dutch
 {
-    internal class DutchMaleGiven : RandomGenerator
+    internal class DutchMaleGiven : RandomTable
     {
-        public static readonly RandomTable Names = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> Names = new()
         {
             "Aad",
             "Aalbert",
@@ -199,9 +205,9 @@ namespace BonsaiGenerators.Tables.Names.Real.Dutch
             "Youry"
         };
 
-        public override string ToString()
+        public DutchMaleGiven()
         {
-            return Names.Next();
+            Entries = Names;
         }
     }
 }

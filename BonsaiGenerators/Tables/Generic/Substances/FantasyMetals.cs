@@ -1,8 +1,20 @@
-﻿namespace BonsaiGenerators.Tables.Generic.Substances
+﻿using System.Collections.Generic;
+
+namespace BonsaiGenerators.Tables.Generic.Substances
 {
-    internal class FantasyMetals : RandomGenerator
+    internal class FantasyMetals : RandomTable
     {
-        public static readonly RandomTable materials = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> materials = new()
         {
             "Mithril",
             "Orichalcum",
@@ -14,9 +26,9 @@
             "Meteor-Iron",
         };
 
-        public override string ToString()
+        public FantasyMetals()
         {
-            return materials.Next();
+            Entries = materials;
         }
     }
 }

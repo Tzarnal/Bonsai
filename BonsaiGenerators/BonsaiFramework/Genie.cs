@@ -4,34 +4,37 @@ namespace BonsaiGenerators
 {
     public sealed class Genie
     {
-        private static readonly Genie instance = new Genie();
-        private Random _random;
+        private static Random _random;
 
-        static Genie()
+        private static void EnsureInstance()
         {
+            if (_random == null)
+            {
+                Console.WriteLine("EnsureInstance Fired");
+                _random = new Random();
+            }
         }
 
-        private Genie()
+        public static int Next(int maxValue)
         {
-            _random = new Random();
-        }
+            EnsureInstance();
 
-        public int Next(int maxValue)
-        {
             return _random.Next(maxValue);
         }
 
-        public int Next(int minValue, int maxValue)
+        public static int Next(int minValue, int maxValue)
         {
+            EnsureInstance();
+
             return _random.Next(minValue, maxValue);
         }
 
-        public void SetSeed(string seed)
+        public static void SetSeed(string seed)
         {
-            var seedInt = seed.GetHashCode();
+            var seedInt = seed.GetAsciiValueSum();
             _random = new Random(seedInt);
-        }
 
-        public static Genie Instance => instance;
+            Console.WriteLine("New random. Seed: " + seed);
+        }
     }
 }

@@ -1,8 +1,20 @@
-﻿namespace BonsaiGenerators.Tables.Names.Real.French
+﻿using System.Collections.Generic;
+
+namespace BonsaiGenerators.Tables.Names.Real.French
 {
-    internal class FrenchMaleGiven : RandomGenerator
+    internal class FrenchMaleGiven : RandomTable
     {
-        public static readonly RandomTable MaleGivenNames = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> MaleGivenNames = new()
         {
             "Aaron",
             "Abel",
@@ -243,9 +255,9 @@
             "Yves",
         };
 
-        public override string ToString()
+        public FrenchMaleGiven()
         {
-            return MaleGivenNames.Next();
+            Entries = MaleGivenNames;
         }
     }
 }

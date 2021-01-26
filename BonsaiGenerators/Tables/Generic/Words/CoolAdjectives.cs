@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace BonsaiGenerators.Tables.Generic.Words
 {
-    internal class CoolAdjectives : RandomGenerator
+    internal class CoolAdjectives : RandomTable
     {
-        public static readonly RandomTable words = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> words = new()
         {
             "Ancient",
             "Ardent",
@@ -63,9 +73,9 @@ namespace BonsaiGenerators.Tables.Generic.Words
             "Radiant",
         };
 
-        public override string ToString()
+        public CoolAdjectives()
         {
-            return words.ToString();
+            Entries = words;
         }
     }
 }

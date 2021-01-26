@@ -1,8 +1,20 @@
-﻿namespace BonsaiGenerators.Tables.Names.Fantasy.Human
+﻿using System.Collections.Generic;
+
+namespace BonsaiGenerators.Tables.Names.Fantasy.Human
 {
-    internal class HumanFemaleGiven : RandomGenerator
+    internal class HumanFemaleGiven : RandomTable
     {
-        public static readonly RandomTable FemaleGivenNames = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> FemaleGivenNames = new()
         {
             "Afton",
             "Agate",
@@ -305,9 +317,9 @@
             "Zeta",
         };
 
-        public override string ToString()
+        public HumanFemaleGiven()
         {
-            return FemaleGivenNames.Next();
+            Entries = FemaleGivenNames;
         }
     }
 }

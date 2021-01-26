@@ -45,9 +45,19 @@
             "trin",
         };
 
+        public override string Next(string Seed = "")
+        {
+            if (Seed != "")
+            {
+                Genie.SetSeed(Seed);
+            }
+
+            return $"{Prefix}{Fragment1}{Fragment2}{Suffix}";
+        }
+
         public override string ToString()
         {
-            return $"{Fragment1}{Fragment2}";
+            return Next();
         }
     }
 }

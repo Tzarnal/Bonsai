@@ -1,8 +1,20 @@
-﻿namespace BonsaiGenerators.Tables.Generic.Colours
+﻿using System.Collections.Generic;
+
+namespace BonsaiGenerators.Tables.Generic.Colours
 {
-    internal class ColoursMany : RandomGenerator
+    internal class ColoursMany : RandomTable
     {
-        public static readonly RandomTable colours = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> colours = new()
         {
             "amaranth",
             "amber",
@@ -91,9 +103,9 @@
             "yellow",
         };
 
-        public override string ToString()
+        public ColoursMany()
         {
-            return colours.Next();
+            Entries = colours;
         }
     }
 }

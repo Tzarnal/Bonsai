@@ -1,8 +1,20 @@
-﻿namespace BonsaiGenerators.Tables.Generic.Words
+﻿using System.Collections.Generic;
+
+namespace BonsaiGenerators.Tables.Generic.Words
 {
-    internal class Adverbs : RandomGenerator
+    internal class Adverbs : RandomTable
     {
-        public static readonly RandomTable words = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> words = new()
         {
             "Beautifully",
             "Brightly",
@@ -36,9 +48,9 @@
             "Yearly",
         };
 
-        public override string ToString()
+        public Adverbs()
         {
-            return words.ToString();
+            Entries = words;
         }
     }
 }

@@ -24,10 +24,5 @@ namespace BonsaiGenerators.Content
         {
             return NameGenerators.RandomElement().FullName();
         }
-
-        public override string ToString()
-        {
-            return FullName();
-        }
     }
 }

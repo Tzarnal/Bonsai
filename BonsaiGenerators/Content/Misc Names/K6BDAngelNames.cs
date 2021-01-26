@@ -293,7 +293,7 @@ namespace BonsaiGenerators.Content
             ("{movementPhrase}", movementPhrase),
         };
 
-        public override string ToString()
+        public string Generate()
         {
             var location = _location
                 .DynamicInterpolation(new List<(string, RandomGenerator)> {
@@ -306,21 +306,36 @@ namespace BonsaiGenerators.Content
                     ("{location}", location)
                 }).CapitalizeFirstChar();
 
-            var genie = Genie.Instance;
+            int number = Genie.Next(3, 99);
 
-            int number = genie.Next(3, 99);
-
-            if (genie.Next(2) == 1)
+            if (Genie.Next(2) == 1)
             {
-                number = genie.Next(5, 20);
+                number = Genie.Next(5, 20);
             }
 
-            return $" {number} {name}";
+            return $"{number} {name}";
         }
 
         public string Hail()
         {
             return $"{hail}";
+        }
+
+        public override string ToString()
+        {
+            return Next();
+        }
+
+        public override string Next(string Seed = "")
+        {
+            if (Seed != "")
+            {
+                Genie.SetSeed(Seed);
+            }
+
+            var randomElement = Generate();
+
+            return $"{Prefix}{randomElement}{Suffix}";
         }
     }
 }

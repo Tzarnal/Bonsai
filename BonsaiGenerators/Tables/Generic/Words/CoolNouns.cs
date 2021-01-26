@@ -1,8 +1,20 @@
-﻿namespace BonsaiGenerators.Tables.Generic.Words
+﻿using System.Collections.Generic;
+
+namespace BonsaiGenerators.Tables.Generic.Words
 {
-    internal class CoolNouns : RandomGenerator
+    internal class CoolNouns : RandomTable
     {
-        public static readonly RandomTable words = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> words = new()
 
         {
             "Anvil",
@@ -86,9 +98,9 @@
             "Word",
         };
 
-        public override string ToString()
+        public CoolNouns()
         {
-            return words.ToString();
+            Entries = words;
         }
     }
 }

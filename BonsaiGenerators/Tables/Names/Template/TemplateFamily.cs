@@ -1,15 +1,25 @@
-﻿namespace BonsaiGenerators.Tables.Names.Real.Template
-{
-    internal class TemplateFamily : RandomGenerator
-    {
-        public static readonly RandomTable FamilyNames = new()
-        {
-            "",
-        };
+﻿using System.Collections.Generic;
 
-        public override string ToString()
+namespace BonsaiGenerators.Tables.Names.Real.Template
+{
+    internal class TemplateFamily : RandomTable
+    {
+        public new List<string> Entries
         {
-            return FamilyNames.Next();
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public TemplateFamily()
+        {
+            Entries = new()
+            {
+                "",
+            };
         }
     }
 }

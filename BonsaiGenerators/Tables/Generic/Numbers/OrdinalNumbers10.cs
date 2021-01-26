@@ -1,8 +1,20 @@
-﻿namespace BonsaiGenerators.Tables.Generic.Numbers
+﻿using System.Collections.Generic;
+
+namespace BonsaiGenerators.Tables.Generic.Numbers
 {
-    internal class OrdinalNumbers10 : RandomGenerator
+    internal class OrdinalNumbers10 : RandomTable
     {
-        public static readonly RandomTable Numbers = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> Numbers = new()
         {
             "First",
             "Second",
@@ -16,9 +28,9 @@
             "Tenth",
         };
 
-        public override string ToString()
+        public OrdinalNumbers10()
         {
-            return Numbers.Next();
+            Entries = Numbers;
         }
     }
 }

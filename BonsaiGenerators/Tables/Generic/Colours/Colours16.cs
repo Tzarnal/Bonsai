@@ -1,30 +1,40 @@
-﻿namespace BonsaiGenerators.Tables.Generic.Colours
-{
-    internal class Colours16 : RandomGenerator
-    {
-        public static readonly RandomTable colours = new()
-        {
-            "white",
-            "black",
-            "gray",
-            "maroon",
-            "red",
-            "crimson",
-            "orange",
-            "yellow",
-            "green",
-            "lime",
-            "blue",
-            "teal",
-            "purple",
-            "brown",
-            "olive",
-            "pink",
-        };
+﻿using System.Collections.Generic;
 
-        public override string ToString()
+namespace BonsaiGenerators.Tables.Generic.Colours
+{
+    internal class Colours16 : RandomTable
+    {
+        public new List<string> Entries
         {
-            return colours.Next();
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public Colours16()
+        {
+            Entries = new()
+            {
+                "white",
+                "black",
+                "gray",
+                "maroon",
+                "red",
+                "crimson",
+                "orange",
+                "yellow",
+                "green",
+                "lime",
+                "blue",
+                "teal",
+                "purple",
+                "brown",
+                "olive",
+                "pink",
+            };
         }
     }
 }

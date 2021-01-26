@@ -1,8 +1,20 @@
-﻿namespace BonsaiGenerators.Tables.Names.Real.Chinese
+﻿using System.Collections.Generic;
+
+namespace BonsaiGenerators.Tables.Names.Real.Chinese
 {
-    internal class ChineseFemaleGiven : RandomGenerator
+    internal class ChineseFemaleGiven : RandomTable
     {
-        public static readonly RandomTable FemaleGivenNames = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> FemaleGivenNames = new()
         {
             "Ahchu",
             "Ahkum",
@@ -436,9 +448,9 @@
             "Zongying",
         };
 
-        public override string ToString()
+        public ChineseFemaleGiven()
         {
-            return FemaleGivenNames.Next();
+            Entries = FemaleGivenNames;
         }
     }
 }

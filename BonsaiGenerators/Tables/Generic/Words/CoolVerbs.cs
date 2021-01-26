@@ -1,9 +1,20 @@
-﻿namespace BonsaiGenerators.Tables.Generic.Words
-{
-    internal class CoolVerbs : RandomGenerator
-    {
-        public static readonly RandomTable words = new()
+﻿using System.Collections.Generic;
 
+namespace BonsaiGenerators.Tables.Generic.Words
+{
+    internal class CoolVerbs : RandomTable
+    {
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> _entries = new()
         {
             "Accuse",
             "Analyze",
@@ -60,9 +71,9 @@
             "Witnes",
         };
 
-        public override string ToString()
+        public CoolVerbs()
         {
-            return words.ToString();
+            Entries = _entries;
         }
     }
 }

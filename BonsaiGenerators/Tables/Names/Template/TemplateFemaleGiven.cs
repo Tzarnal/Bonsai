@@ -1,15 +1,25 @@
-﻿namespace BonsaiGenerators.Tables.Names.Real.Template
-{
-    internal class TemplateFemaleGiven : RandomGenerator
-    {
-        public static readonly RandomTable FemaleGivenNames = new()
-        {
-            "",
-        };
+﻿using System.Collections.Generic;
 
-        public override string ToString()
+namespace BonsaiGenerators.Tables.Names.Real.Template
+{
+    internal class TemplateFemaleGiven : RandomTable
+    {
+        public new List<string> Entries
         {
-            return FemaleGivenNames.Next();
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public TemplateFemaleGiven()
+        {
+            Entries = new()
+            {
+                "",
+            };
         }
     }
 }

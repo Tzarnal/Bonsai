@@ -5,16 +5,28 @@ namespace BonsaiGenerators
 {
     public abstract class RandomGenerator
     {
+        public string Prefix { get; set; }
+        public string Suffix { get; set; }
+
+        public List<(string, RandomGenerator)> Replacements { get; set; } = new();
+
+        public void AddReplacement(string search, RandomGenerator replace)
+        {
+            Replacements.Add((search, replace));
+        }
+
+        public void AddReplacements(List<(string, RandomGenerator)> replacements)
+        {
+            Replacements.AddRange(replacements);
+        }
+
         public override abstract string ToString();
 
-        public string Next(string Seed = "")
-        {
-            if (Seed != "")
-            {
-                Genie.Instance.SetSeed(Seed);
-            }
+        public abstract string Next(string Seed = "");
 
-            return ToString();
+        public string DynamicInterpolation(string Seed = "")
+        {
+            return DynamicInterpolation(Next(Seed), Replacements);
         }
 
         public string DynamicInterpolation(List<(string, RandomGenerator)> Replacements, string Seed = "")
@@ -28,11 +40,15 @@ namespace BonsaiGenerators
             {
                 while (input.Contains(key))
                 {
-                    input = input.ReplaceFirst(key, generator.Next());
+                    var candidate = generator.Next();
+                    if (!input.Contains(candidate))
+                    {
+                        input = input.ReplaceFirst(key, generator.Next());
+                    }
                 }
             }
 
-            return input.CapitalizeFirstChar();
+            return input;
         }
     }
 }

@@ -5,21 +5,45 @@ namespace BonsaiGenerators
 {
     public class RandomTableMixed : RandomGenerator, IEnumerable<RandomGenerator>
     {
-        private readonly List<RandomGenerator> _entries = new();
+        public List<RandomGenerator> Entries { get; set; } = new();
+
+        public RandomTableMixed()
+        {
+        }
+
+        public RandomTableMixed(string search, RandomGenerator replace, string prefix = "", string suffix = "")
+        {
+            Replacements.Add((search, replace));
+            Prefix = prefix;
+            Suffix = suffix;
+        }
+
+        public RandomTableMixed(List<(string, RandomGenerator)> replacements, string prefix = "", string suffix = "")
+        {
+            Replacements = replacements;
+            Prefix = prefix;
+            Suffix = suffix;
+        }
+
+        public RandomTableMixed(string prefix, string suffix = "")
+        {
+            Prefix = prefix;
+            Suffix = suffix;
+        }
 
         public void Add(string entry)
         {
-            _entries.Add(new BonsaiString(entry));
+            Entries.Add(new BonsaiString(entry));
         }
 
         public void Add(RandomGenerator entry)
         {
-            _entries.Add(entry);
+            Entries.Add(entry);
         }
 
         public IEnumerator<RandomGenerator> GetEnumerator()
         {
-            return _entries.GetEnumerator();
+            return Entries.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -29,7 +53,22 @@ namespace BonsaiGenerators
 
         public override string ToString()
         {
-            return _entries.RandomElement().ToString();
+            return Next();
+        }
+
+        public override string Next(string Seed = "")
+        {
+            if (Seed != "")
+            {
+                Genie.SetSeed(Seed);
+            }
+
+            var randomElement = Entries.RandomElement().ToString();
+            randomElement = $"{Prefix}{randomElement}{Suffix}";
+
+            randomElement = DynamicInterpolation(randomElement, Replacements);
+
+            return randomElement;
         }
     }
 }

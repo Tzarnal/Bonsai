@@ -9,17 +9,15 @@ namespace BonsaiGenerators
     {
         public static T RandomElement<T>(this List<T> list)
         {
-            var genie = Genie.Instance;
-            return list[genie.Next(0, list.Count)];
+            return list[Genie.Next(0, list.Count)];
         }
 
         public static TKey RandomElementWeighted<TKey>(this Dictionary<TKey, int> dictionary)
         {
-            var genie = Genie.Instance;
             TKey element = dictionary.FirstOrDefault().Key;
 
             var totalWeight = dictionary.Sum(kvp => kvp.Value);
-            var r = genie.Next(totalWeight);
+            var r = Genie.Next(totalWeight);
 
             foreach (var (key, value) in dictionary)
             {
@@ -62,6 +60,11 @@ namespace BonsaiGenerators
         public static string CapitalizeFirstChar(this string text)
         {
             return $"{text[0].ToString().ToUpper()}{text[1..]}";
+        }
+
+        public static int GetAsciiValueSum(this string text)
+        {
+            return text.Sum(c => c);
         }
     }
 }

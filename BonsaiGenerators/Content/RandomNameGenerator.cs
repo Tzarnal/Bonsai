@@ -13,5 +13,22 @@ namespace BonsaiGenerators
         public abstract string FemaleFullName();
 
         public abstract string MaleFullName();
+
+        public override string ToString()
+        {
+            return Next();
+        }
+
+        public override string Next(string Seed = "")
+        {
+            if (Seed != "")
+            {
+                Genie.SetSeed(Seed);
+            }
+
+            var randomElement = FullName();
+
+            return $"{Prefix}{randomElement}{Suffix}";
+        }
     }
 }

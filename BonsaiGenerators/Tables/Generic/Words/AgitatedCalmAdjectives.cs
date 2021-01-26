@@ -1,8 +1,20 @@
-﻿namespace BonsaiGenerators.Tables.Generic.Words
+﻿using System.Collections.Generic;
+
+namespace BonsaiGenerators.Tables.Generic.Words
 {
-    internal class AgitatedCalmAdjectives : RandomGenerator
+    internal class AgitatedCalmAdjectives : RandomTable
     {
-        public static readonly RandomTable words = new()
+        public new List<string> Entries
+        {
+            get { return base.Entries; }
+
+            set
+            {
+                base.Entries = value;
+            }
+        }
+
+        public static readonly List<string> words = new()
         {
             "Abating",
             "Calm",
@@ -41,9 +53,9 @@
             "Wispering",
         };
 
-        public override string ToString()
+        public AgitatedCalmAdjectives()
         {
-            return words.ToString();
+            Entries = words;
         }
     }
 }
