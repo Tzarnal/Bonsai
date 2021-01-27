@@ -13,6 +13,7 @@ namespace BonsaiGenerators.Content
             new GreekNames(),
             new KoreanNames(),
             new LatinAmericanNames(),
+            new NigerianNames(),
         };
 
         public override string FemaleFullName()
