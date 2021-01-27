@@ -11,6 +11,7 @@ namespace BonsaiGenerators.Content
             new DutchNames(),
             new FrenchNames(),
             new GreekNames(),
+            new KoreanNames(),
         };
 
         public override string FemaleFullName()
