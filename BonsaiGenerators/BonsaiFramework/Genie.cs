@@ -9,8 +9,7 @@ namespace BonsaiGenerators
         private static void EnsureInstance()
         {
             if (_random == null)
-            {
-                Console.WriteLine("EnsureInstance Fired");
+            {                
                 _random = new Random();
             }
         }
@@ -33,8 +32,6 @@ namespace BonsaiGenerators
         {
             var seedInt = seed.GetAsciiValueSum();
             _random = new Random(seedInt);
-
-            Console.WriteLine("New random. Seed: " + seed);
         }
     }
 }
