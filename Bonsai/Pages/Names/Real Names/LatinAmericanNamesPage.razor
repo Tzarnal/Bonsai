@@ -1,0 +1,14 @@
+﻿@using BonsaiGenerators;
+@using BonsaiGenerators.Content;
+
+@page "/RealNames/LatinAmerican"
+
+<h3 class="p-2 text-3xl">Latin American Names</h3>
+
+<hr class="px-8" />
+
+<NameGeneratorDisplay generator="@generator" />
+
+@code {
+    private RandomNameGenerator generator = new LatinAmericanNames();
+}
